@@ -45,7 +45,7 @@ numerical_pipeline = Pipeline([
 
 categorical_pipeline = Pipeline([
     ('imputer', SimpleImputer(strategy='most_frequent')),
-    ('encoder', OneHotEncoder(handle_unknown='ignore'))
+    ('onehot', OneHotEncoder(handle_unknown='ignore'))
 ])
 
 # Combine the numerical and categorical pipelines into a single ColumnTransformer
@@ -93,3 +93,6 @@ plt.ylabel('Actual')
 # Show the plot
 plt.tight_layout()
 plt.show()
+
+#Feature Importance
+model.best_estimator_['preprocessor'].named_transformers_['cat'].named_steps['onehot'].get_feature_names_out(categorical_features)
