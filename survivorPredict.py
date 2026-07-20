@@ -96,3 +96,22 @@ plt.show()
 
 #Feature Importance
 model.best_estimator_['preprocessor'].named_transformers_['cat'].named_steps['onehot'].get_feature_names_out(categorical_features)
+feature_importances = model.best_estimator_['classifier'].feature_importances_
+ # Combine the numerical and one-hot encoded categorical feature names
+feature_names = numerical_features + list(model.best_estimator_['preprocessor'].named_transformers_['cat'].named_steps['onehot'].get_feature_names_out(categorical_features))
+
+#Create a dataframe of fature importances:
+importance_df = pd.DataFrame({'Feature': feature_names, 'Importance': feature_importances}).sort_values(by='Importance', ascending=False)
+
+# Plotting
+plt.figure(figsize=(10, 6))
+plt.barh(importance_df['Feature'], importance_df['Importance'], color='skyblue')
+plt.gca().invert_yaxis() 
+plt.title('Most Important Features in predicting whether a passenger survived')
+plt.xlabel('Importance Score')
+plt.show()
+
+# Print test score 
+test_score = model.score(X_test, y_test)
+print(f"\nTest set accuracy: {test_score:.2%}")
+
