@@ -72,8 +72,24 @@ param_grid = {
 cv = StratifiedKFold(n_splits=5, shuffle=True)
 
 model = GridSearchCV(estimator=pipeline, param_grid=param_grid, cv=cv, scoring='accuracy', verbose=2)
-print(model.fit(X_train, y_train))
+model.fit(X_train, y_train)
+#print(model.fit(X_train, y_train))
 
 # get the model predicting on the test set
 y_pred = model.predict(X_test)
 print(classification_report(y_test, y_pred))
+
+# plot the confusion matrix
+conf_matrix = confusion_matrix(y_test, y_pred)
+
+plt.figure()
+sns.heatmap(conf_matrix, annot=True, cmap='Blues', fmt='d')
+
+# Set the title and labels
+plt.title('Titanic Classification Confusion Matrix')
+plt.xlabel('Predicted')
+plt.ylabel('Actual')
+
+# Show the plot
+plt.tight_layout()
+plt.show()
