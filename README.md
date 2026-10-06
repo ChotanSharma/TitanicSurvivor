@@ -12,8 +12,6 @@ This project provides hands-on experience with building, optimizing, and evaluat
 
 ## Project Objectives
 
-After completing this project, you will be able to:
-
 - Build a machine learning model to solve a classification problem using **scikit-learn**.
 - Create a preprocessing and modeling pipeline using **Pipeline**.
 - Apply **cross-validation** to evaluate model performance.
